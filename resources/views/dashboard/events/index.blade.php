@@ -27,6 +27,8 @@
                                 <input type="month" name="date_picked" class="form-control" value="{{ date('Y-m', strtotime($datePicked)) }}">
 
                                 <div class="d-flex justify-content-end mt-1">
+                                    <a href="{{ route('generate.events', ['date_picked' => date('Y-m', strtotime($datePicked))]) }}" target="_blank" class="btn btn-sm btn-danger mr-2">Print PDF</a>
+
                                     <a href="{{ route('events.index') }}" class="btn btn-sm btn-secondary mr-2">Muat Ulang</a>
 
                                     <button type="submit" class="btn btn-sm btn-primary">Urutkan</button>

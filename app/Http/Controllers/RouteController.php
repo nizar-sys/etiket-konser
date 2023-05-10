@@ -5,13 +5,30 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RequestStoreOrUpdateOrder;
 use App\Models\Event;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class RouteController extends Controller
 {
     public function dashboard()
     {
-        return view('dashboard.index');
+        $orderQuery = Order::query();
+        $eventQuery = Event::query();
+
+        $countData = [
+            'staff' => User::count(),
+            'event' => $eventQuery->count(),
+            'order' => $orderQuery->count(),
+        ];
+
+        // get most sold ticket event
+        $mostSoldTicketEvent = $orderQuery->selectRaw('event_id, count(*) as total')
+        ->groupBy('event_id')
+        ->orderBy('total', 'desc')
+        ->get();
+
+
+        return view('dashboard.index', compact('countData', 'mostSoldTicketEvent'));
     }
 
     function eventList()

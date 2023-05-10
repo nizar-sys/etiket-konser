@@ -48,4 +48,9 @@ class Event extends Model
     {
         return 'Rp. ' . number_format($this->attributes['harga_tiket'], 0, ',', '.');
     }
+
+    function orders()
+    {
+        return $this->hasMany(Order::class, 'event_id', 'id');
+    }
 }

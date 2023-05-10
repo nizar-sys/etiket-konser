@@ -16,9 +16,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::orderByDesc('id')->get();
+        $datePicked = request()->date_picked ?? date('Y-m-d');
+        $formatedDatePicked = \Carbon\Carbon::parse($datePicked)->translatedFormat('F Y');
 
-        return view('dashboard.orders.index', compact('orders'));
+        $orders = Order::orderBy('created_at', 'asc')
+        ->whereMonth('created_at', date('m', strtotime($datePicked)))
+        ->get();
+
+        return view('dashboard.orders.index', compact('orders', 'formatedDatePicked', 'datePicked'));
     }
 
     /**

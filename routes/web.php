@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteController;
 
@@ -41,7 +42,15 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::get('/', [RouteController::class, 'dashboard'])->name('home'); # dashboard
 
-    Route::resource('users', UserController::class);
+    Route::middleware('roles:admin')->group(function(){
+        Route::resource('users', UserController::class);
+    });
+    
     Route::resource('events', EventController::class);
     Route::resource('orders', OrderController::class);
+
+    Route::get('/generate-most-popular-event', [PdfController::class, 'mostPopularEvent'])->name('generate.most-popular-event');
+    Route::get('/generate-events', [PdfController::class, 'events'])->name('generate.events');
+    Route::get('/generate-orders', [PdfController::class, 'orders'])->name('generate.orders');
+    Route::get('/generate-users', [PdfController::class, 'users'])->name('generate.users');
 });
