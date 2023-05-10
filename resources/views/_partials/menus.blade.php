@@ -20,3 +20,9 @@
         <span class="nav-link-text">Data Acara</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ $routeActive == 'orders.index' ? 'active' : '' }}" href="{{ route('orders.index') }}">
+        <i class="fas fa-envelope text-danger"></i>
+        <span class="nav-link-text">Data Pesanan</span>
+    </a>
+</li>

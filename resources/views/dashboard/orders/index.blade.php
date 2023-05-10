@@ -1,14 +1,10 @@
 @extends('layouts.app')
-@section('title', 'Data Staff')
+@section('title', 'Data Pemesanan')
 
-@section('title-header', 'Data Staff')
+@section('title-header', 'Data Pemesanan')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">Data Staff</li>
-@endsection
-
-@section('action_btn')
-    <a href="{{route('users.create')}}" class="btn btn-default">Tambah Data</a>
+    <li class="breadcrumb-item active">Data Pemesanan</li>
 @endsection
 
 @section('content')
@@ -16,53 +12,45 @@
         <div class="col-12">
             <div class="card shadow">
                 <div class="card-header bg-transparent border-0 text-dark">
-                    <h2 class="card-title h3">Data Staff</h2>
+                    <h2 class="card-title h3">Data Pemesanan</h2>
                     <div class="table-responsive">
-                        <table class="table table-flush table-hover" id="data-staff">
+                        <table class="table table-flush table-hover" id="data-order">
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
+                                    <th>Nama Acara</th>
+                                    <th>Nama Pemesan</th>
                                     <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Avatar</th>
+                                    <th>No HP</th>
+                                    <th>Jumlah Tiket</th>
+                                    <th>Total Harga</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($users as $user)
+                                @forelse ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            {{ str()->title($user->role) }}
-                                        </td>
-                                        <td>
-                                            <img src="{{ asset('/uploads/images/'.$user->avatar) }}" alt="{{ $user->name }}" width="100">
-                                        </td>
+                                        <td>{{ $order->event->nama_acara }}</td>
+                                        <td>{{ $order->nama_pemesan }}</td>
+                                        <td>{{ $order->email_pemesan }}</td>
+                                        <td>{{ $order->no_hp_pemesan }}</td>
+                                        <td>{{ $order->jumlah_tiket }}</td>
+                                        <td>{{ $order->total_harga }}</td>
                                         <td class="d-flex jutify-content-center">
-                                            <a href="{{route('users.edit', $user->id)}}" class="btn btn-sm btn-warning"><i class="fas fa-pencil-alt"></i></a>
-                                            <form id="delete-form-{{ $user->id }}" action="{{ route('users.destroy', $user->id) }}" class="d-none" method="post">
+                                            <form id="delete-form-{{ $order->id }}" action="{{ route('orders.destroy', $order->id) }}" class="d-none" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-                                            <button onclick="deleteForm('{{$user->id}}')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                            <button onclick="deleteForm('{{$order->id}}')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3">Tidak ada data</td>
+                                        <td colspan="8">Tidak ada data</td>
                                     </tr>
                                 @endforelse
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th colspan="4">
-                                        {{ $users->links() }}
-                                    </th>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -73,7 +61,7 @@
 
 @section('script')
     <script>
-        var datatable = $('#data-staff').DataTable({
+        var datatable = $('#data-order').DataTable({
             processing: false,
             responsive: false,
             language: {

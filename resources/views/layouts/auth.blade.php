@@ -76,42 +76,6 @@
                             <span class="nav-link-inner--text">Login</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <span class="nav-link-inner--text">Register</span>
-                        </a>
-                    </li>
-                </ul>
-                <hr class="d-lg-none" />
-                <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="https://www.instagram.com/emnizaar" target="_blank"
-                            data-toggle="tooltip" data-original-title="Follow us on Instagram">
-                            <i class="fab fa-instagram"></i>
-                            <span class="nav-link-inner--text d-lg-none">Instagram</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="https://twitter.com/jokiicode" target="_blank"
-                            data-toggle="tooltip" data-original-title="Follow us on Twitter">
-                            <i class="fab fa-twitter-square"></i>
-                            <span class="nav-link-inner--text d-lg-none">Twitter</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="https://github.com/nizar-sys" target="_blank"
-                            data-toggle="tooltip" data-original-title="Star us on Github">
-                            <i class="fab fa-github"></i>
-                            <span class="nav-link-inner--text d-lg-none">Github</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-icon" href="mailto:nizarid04@email.com" target="_blank"
-                            data-toggle="tooltip" data-original-title="Mail us on Email">
-                            <i class="fas fa-envelope"></i>
-                            <span class="nav-link-inner--text d-lg-none">Mail</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>

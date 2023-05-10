@@ -130,7 +130,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         // delete old file
         $oldPath = public_path('/uploads/images/posters/'.$event->poster);
-        if(file_exists($oldPath) && $event->poster != 'dummy.png'){
+        if(file_exists($oldPath) && $event->poster != 'poster.png'){
             unlink($oldPath);
         }
         $event->delete();

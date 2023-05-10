@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Event;
+use App\Models\Order;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
-        Event::factory(100)->create();
+        Event::factory(50)->create();
+        Order::factory(50)->create();
     }
 }
