@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RequestStoreOrUpdateOrder;
+use App\Mail\SendTiketToEmail;
 use App\Models\Event;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class RouteController extends Controller
 {
@@ -76,6 +78,13 @@ class RouteController extends Controller
         $newOrder = Order::create($request->validated() + [
             'event_id' => $request->event_id,
         ]);
+
+        // send email to user
+        $details = [
+            'order' => $newOrder,
+        ];
+
+        event(Mail::to($request->email_pemesan)->send(new SendTiketToEmail($details)));
 
         return redirect()->route('event.order.detail', $newOrder->id)->with('success', 'Berhasil memesan tiket');
     }
