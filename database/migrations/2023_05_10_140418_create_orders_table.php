@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('kode_pemesanan')->unique();
             $table->unsignedBigInteger("event_id");
             $table->foreign("event_id")->references("id")->on("events")->onDelete("cascade")->cascadeOnUpdate();
             $table->string("nama_pemesan");
             $table->string("email_pemesan");
             $table->string("no_hp_pemesan");
             $table->integer("jumlah_tiket");
+            $table->enum('status_pemakaian', ['belum', 'sudah'])->default('belum');
             $table->timestamps();
         });
     }

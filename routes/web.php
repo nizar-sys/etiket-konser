@@ -45,7 +45,10 @@ Route::middleware('auth')->prefix('dashboard')->group(function() {
     Route::middleware('roles:admin')->group(function(){
         Route::resource('users', UserController::class);
     });
-    
+    Route::get('/checkin-ticket', [EventController::class, 'checkinTicket'])->name('checkin.ticket');
+    Route::get('/checkin-detail/{orderId}', [EventController::class, 'checkinDetail'])->name('checkin.detail');
+    Route::post('/checkin-ticket', [EventController::class, 'checkoutTicket'])->name('checkin.store');
+
     Route::resource('events', EventController::class);
     Route::resource('orders', OrderController::class);
 

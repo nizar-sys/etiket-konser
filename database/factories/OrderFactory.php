@@ -17,6 +17,7 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
+            'kode_pemesanan' => 'TIK-'.date('YmdHi').$this->faker->numberBetween(100, 999),
             'event_id' => $this->faker->numberBetween(1, 50),
             'nama_pemesan' => $this->faker->name,
             'email_pemesan' => $this->faker->email,

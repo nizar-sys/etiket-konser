@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RequestCheckinTickect;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Requests\RequestStoreOrUpdateEvent;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 
 class EventController extends Controller
@@ -136,5 +138,45 @@ class EventController extends Controller
         $event->delete();
 
         return redirect(route('events.index'))->with('success', 'Data acara berhasil dihapus.');
+    }
+
+    public function checkinTicket()
+    {
+        return view('dashboard.events.checkin');
+    }
+
+    public function checkoutTicket(RequestCheckinTickect $request)
+    {
+        $order = Order::whereKodePemesanan($request->kode_pemesanan)->first();
+
+        if (is_null($order)) {
+            return redirect(route('checkin.ticket'))->with('error', 'Kode pemesanan tidak valid.');
+        }
+
+        if ($order->status_pemakaian == 'sudah') {
+            return redirect(route('checkin.ticket'))->with('error', 'Tiket sudah digunakan.');
+        }
+
+        $order->update([
+            'status_pemakaian' => 'sudah',
+            'updated_at' => now()
+        ]);
+
+        return redirect(route('checkin.detail', $request->kode_pemesanan))->with('success', 'Tiket berhasil digunakan.');
+    }
+
+    public function checkinDetail($kodePemesanan)
+    {
+        $order = Order::whereKodePemesanan($kodePemesanan)->first();
+
+        if (is_null($order)) {
+            return redirect(route('checkin.ticket'))->with('error', 'Kode pemesanan tidak valid.');
+        }
+
+        if ($order->status_pemakaian == 'belum') {
+            return redirect(route('checkin.ticket'))->with('error', 'Tiket belum digunakan.');
+        }
+
+        return view('dashboard.events.checkin-detail', compact('order'));
     }
 }

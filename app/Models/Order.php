@@ -10,15 +10,18 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'kode_pemesanan',
         'event_id',
         'nama_pemesan',
         'email_pemesan',
         'no_hp_pemesan',
-        'jumlah_tiket'
+        'jumlah_tiket',
+        'status_pemakaian'
     ];
 
     protected $appends = [
-        'total_harga'
+        'total_harga',
+        'status'
     ];
 
     // function boot
@@ -43,5 +46,10 @@ class Order extends Model
     public function getTotalHargaAttribute()
     {
         return 'Rp. ' . number_format($this->jumlah_tiket * $this->event->harga_tiket, 0, ',', '.');
+    }
+
+    public function getStatusAttribute()
+    {
+        return $this->status_pemakaian == 'belum' ? 'Belum Digunakan' : 'Sudah Digunakan';
     }
 }

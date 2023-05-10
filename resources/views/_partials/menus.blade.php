@@ -28,3 +28,9 @@
         <span class="nav-link-text">Data Pesanan</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ $routeActive == 'checkin.ticket' ? 'active' : '' }}" href="{{ route('checkin.ticket') }}">
+        <i class="fas fa-pencil-alt text-warning"></i>
+        <span class="nav-link-text">Modul Penggunaan Tiket</span>
+    </a>
+</li>

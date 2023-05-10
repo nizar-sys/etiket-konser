@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tiket #{{ $order->id }}{{ $order->nama_pemesan }}</title>
+    <title>Tiket #{{ $order->kode_pemesanan }}{{ $order->nama_pemesan }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
@@ -205,7 +205,7 @@
                 </p>
                 <div class="ticket-number">
                     <p>
-                        #{{ $order->id . $order->created_at }}
+                        #{{ $order->kode_pemesanan }}
                     </p>
                 </div>
             </div>
@@ -235,7 +235,7 @@
                     <h1>{{ $order->total_harga }}</h1>
                 </div>
                 <p class="ticket-number">
-                    #{{ $order->id . $order->created_at }}
+                    #{{ $order->kode_pemesanan }}
                 </p>
             </div>
         </div>

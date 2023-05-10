@@ -37,6 +37,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Tiket</th>
+                                    <th>Status Tiket</th>
                                     <th>Nama Acara</th>
                                     <th>Nama Pemesan</th>
                                     <th>Email</th>
@@ -50,6 +52,14 @@
                                 @forelse ($orders as $order)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $order->kode_pemesanan }}</td>
+                                        <td>
+                                            @if ($order->status_pemakaian == 'belum')
+                                                Belum Digunakan
+                                            @else
+                                                Sudah Digunakan, lihat detil <a href="{{ route('checkin.detail', $order->kode_pemesanan) }}">disini</a>
+                                            @endif
+                                        </td>
                                         <td>{{ $order->event->nama_acara }}</td>
                                         <td>{{ $order->nama_pemesan }}</td>
                                         <td>{{ $order->email_pemesan }}</td>
