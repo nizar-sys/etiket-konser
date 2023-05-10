@@ -31,8 +31,8 @@ class RequestCheckinTickect extends FormRequest
     public function messages()
     {
         return [
-            'kode_pemesanan.required' => 'Kode pemesanan tidak boleh kosong.',
-            'kode_pemesanan.exists' => 'Kode pemesanan tidak valid.'
+            'kode_pemesanan.required' => 'Kode unik tiket tidak boleh kosong.',
+            'kode_pemesanan.exists' => 'Kode unik tiket tidak valid.'
         ];
     }
 }
